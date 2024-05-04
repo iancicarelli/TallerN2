@@ -25,4 +25,19 @@ public class Libro {
     public void agregarComentario(String comentario) {
         comentarios.add(comentario);
     }
+
+    public String toCSV() {
+        return String.format("%s,%s,%s,%d", titulo, autor, categoria, ejemplaresDisponibles);
+    }
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", ejemplaresDisponibles=" + ejemplaresDisponibles +
+                ", calificaciones=" + calificaciones +
+                ", comentarios=" + comentarios +
+                '}';
+    }
 }
