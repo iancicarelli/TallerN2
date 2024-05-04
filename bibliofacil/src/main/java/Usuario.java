@@ -13,6 +13,7 @@ public class Usuario {
 
     public Usuario(Sesion sesion) {
         this.sesion = sesion;
+        this.nombre = "";
         // this.tipo = tipo; //cambiado por "cual".
         this.cual = 0; //la acción más básica, cual = 0. PRIVILEGIO.
         this.historialPrestamos = new ArrayList<>();
@@ -51,5 +52,9 @@ public class Usuario {
 
     public void agregarCalificacion(int calificacion) {
         calificaciones.add(calificacion);
+    }
+    @Override
+    public String toString() {
+        return "Usuario{" + "nombre=" + nombre + ", privilegio=" + cual + "}";
     }
 }

@@ -35,6 +35,27 @@ public class Biblioteca {
         this.libros.remove(libro);
     }
 
+    public void crearUsuario(String user, String pase) { //Por defecto, privilegios = 0.
+        crearUsuario(user, pase, (short) 0);
+    }
+
+    public void crearUsuario(String user, String pase, short cual) {
+        String nombreArchivo = "bibliofacil/src/main/resources/Usuarios.csv";
+        try (FileWriter writer = new FileWriter(nombreArchivo, true)) {
+            writer.write(String.format("%s,%s,%d,%s,%s,%s,%s", user, pase, cual, "[]", "[]", "[]", "[]")+"\n");
+            System.out.println("Usuario creado éxitosamente.");
+        } catch (IOException e) {
+            System.out.println("Error al acceder el archivo CSV: " + e.getMessage());
+        } try {
+            Usuario usuario = new Usuario(Sesion.conectar(user, pase));
+            if(usuario.cualSesion()!=null) {
+                masUsuario(usuario);
+            }
+        } catch (Exception e){
+            System.out.println("Error al iniciar sesión: " + e.getMessage());
+        }
+    }
+
     /*
     public void prestarLibroA(Usuario usuario, Libro libro) {
     }*/
@@ -48,13 +69,13 @@ public class Biblioteca {
         }
     }
     public void crearLibro() {
-        System.out.println("ingrese el titulo del libro");
+        System.out.println("Ingrese el título del libro");
         String titulo = teclado.nextLine();
-        System.out.println("ingrese el autor del libro");
+        System.out.println("Ingrese el autor del libro");
         String autor = teclado.nextLine();
-        System.out.println("ingrese la categoria del libro");
+        System.out.println("Ingrese la categoria del libro");
         String categoria = teclado.nextLine();
-        int cantidad = validarEntero("ingrese los ejemplares disponibles");
+        int cantidad = validarEntero("Ingrese los ejemplares disponibles");
         masLibro(new Libro(titulo,autor,categoria,cantidad));
         agregarLibroACSV(new Libro(titulo,autor,categoria,cantidad));
     }
@@ -109,5 +130,5 @@ public class Biblioteca {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo CSV: " + e.getMessage());
         }
-    }
+    } /*!!!HACER UNA CLASE "ACTUALIZAR" PARA QUITAR LA REDUNDANCIA DE LEER Y ESCRIBIR!!!*/
 }

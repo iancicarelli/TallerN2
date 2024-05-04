@@ -11,10 +11,11 @@ public class Main {
         System.out.print(admin.queNombre() + " - ");
         System.out.println(Sesion.quienEsQuien(admin));
         //Prueba Biblioteca con CSV
-        Biblioteca biblioteca = new Biblioteca("uno");
+        Biblioteca biblioteca = new Biblioteca("Biblioteca Municipal de Titirilquén");
         biblioteca.crearLibro();
         biblioteca.mostrarLibrosDesdeCSV();
         biblioteca.mostrarLibros();
         biblioteca.eliminarLibroPorIndice();
+        /*Debemos implementar menús en main()*/
     }
 }
