@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class Usuario {
     private final Sesion sesion;
@@ -10,6 +11,7 @@ public class Usuario {
     private List<Libro> librosReservados;
     private List<Integer> calificaciones;
     private List<Libro> listaDeDeseados;
+    private List<String> boletas;
 
     public Usuario(Sesion sesion) {
         this.sesion = sesion;
@@ -20,6 +22,7 @@ public class Usuario {
         this.librosReservados = new ArrayList<>();
         this.calificaciones = new ArrayList<>();
         this.listaDeDeseados = new ArrayList<>();
+        this.boletas = new ArrayList<>();
     }
 
     public short quienEs(){
@@ -43,6 +46,9 @@ public class Usuario {
     }
 
     public void agregarPrestamo(Libro libro) {
+        Date fecha = new Date();
+        boletas.add(libro.toString() + "\n" + "Fecha emitida: " + fecha.toString()
+        + "\n" + "Debe devolverlo en siete días. \n");
         historialPrestamos.add(libro);
     }
 
@@ -50,9 +56,11 @@ public class Usuario {
         librosReservados.add(libro);
     }
 
-    public void agregarCalificacion(int calificacion) {
+    public void agregarCalificacion(int calificacion, Libro libro) {
+        libro.agregarCalificacion(calificacion);
         calificaciones.add(calificacion);
     }
+
     @Override
     public String toString() {
         return "Usuario{" + "nombre=" + nombre + ", privilegio=" + cual + "}";

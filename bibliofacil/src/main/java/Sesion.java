@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Objects;
+
 public class Sesion {
     //public String ip;
     //public String idSesion;
@@ -36,8 +41,12 @@ public class Sesion {
 
     public static String quienEsQuien(Usuario usuario) { //tabla sencilla.
         switch (usuario.quienEs()) {
+            case -1:
+                return "Usuario sancionado";
             case 0:
                 return "Usuario";
+            case 5:
+                return "Súper usuario";
             case 999:
                 return "Administrador";
             default:

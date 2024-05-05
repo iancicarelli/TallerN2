@@ -14,8 +14,13 @@ public class Admin extends Usuario {//administrador es una palabra muy larga.
         }
     }
 
-    /*public void sancionarUsuario(Usuario usuario) {
-    }*/
+    public void sancionarUsuario(String user,boolean bool) {
+        if(!user.equals("admin")) {
+            if(bool){
+
+            }
+        }
+    }
 
     public String verUsuario(Usuario usuario) {
         return usuario.toString();

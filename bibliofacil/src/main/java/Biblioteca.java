@@ -19,6 +19,10 @@ public class Biblioteca {
         this.libros = new ArrayList<>();
     }
 
+    public String cualNombre(){
+        return this.nombre;
+    }
+
     public void masUsuario(Usuario usuario) {
         this.usuarios.add(usuario);
     }
@@ -55,28 +59,41 @@ public class Biblioteca {
             System.out.println("Error al iniciar sesión: " + e.getMessage());
         }
     }
-    public static void actualizar(){
 
+    public static void actualizar(){
     }
 
     public boolean escanearUsuarioExistente(String user) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.cualSesion().cualUsuario().equals(user)) return true; else return false;
-        }return false;
+        return true;
     }
 
-    /*
+    public void mostrarUsuarios() {
+        int i = 0;
+        String nombreArchivo = "bibliofacil/src/main/resources/Usuarios.csv";
+        String linea;
+        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+            while ((linea = reader.readLine()) != null) {
+                System.out.println(i+". "+linea);
+                i++;
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer la lista de usuarios: " + e.getMessage());
+        }
+    }
+
     public void prestarLibroA(Usuario usuario, Libro libro) {
-    }*/
+    }
 
     public String verLibro(Libro libro) {
         return libro.toString();
     }
+
     public void mostrarLibros(){
         for (Libro libro : libros) {
             System.out.println(verLibro(libro));
         }
     }
+
     public void crearLibro() {
         System.out.println("Ingrese el título del libro");
         String titulo = teclado.nextLine();
@@ -119,6 +136,7 @@ public class Biblioteca {
             }
         } while (true);
     }
+
     public void agregarLibroACSV(Libro libro) {
         String nombreArchivo = "bibliofacil/src/main/resources/Libros.csv";
         try (FileWriter writer = new FileWriter(nombreArchivo, true)) {
@@ -130,11 +148,13 @@ public class Biblioteca {
     }
 
     public void mostrarLibrosDesdeCSV() {
+        int i = 0;
         String nombreArchivo = "bibliofacil/src/main/resources/Libros.csv";
         String linea;
         try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
             while ((linea = reader.readLine()) != null) {
-                System.out.println(linea);
+                System.out.println(i+". "+linea);
+                i++;
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo CSV: " + e.getMessage());

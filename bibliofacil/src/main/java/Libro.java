@@ -29,6 +29,13 @@ public class Libro {
     public String toCSV() {
         return String.format("%s,%s,%s,%d", titulo, autor, categoria, ejemplaresDisponibles);
     }
+    public float mediaCalificacion(){
+        float media = 0;
+        for (Integer calificacion : calificaciones) {
+            media += calificacion;
+        }
+        return media/(float)calificaciones.size();
+    }
     @Override
     public String toString() {
         return "Libro{" +
@@ -36,7 +43,7 @@ public class Libro {
                 ", autor='" + autor + '\'' +
                 ", categoria='" + categoria + '\'' +
                 ", ejemplaresDisponibles=" + ejemplaresDisponibles +
-                ", calificaciones=" + calificaciones +
+                ", calificaciones=" + mediaCalificacion() +
                 ", comentarios=" + comentarios +
                 '}';
     }
