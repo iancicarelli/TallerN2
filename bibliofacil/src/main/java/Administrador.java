@@ -1,6 +1,7 @@
 public class Administrador extends Usuario {//administrador es una palabra muy larga.
 
-    public Administrador() {
+    public Administrador(String user, String pase) {
+        super(user, pase);
     }
 
     /*public void sancionarUsuario(Usuario usuario) {

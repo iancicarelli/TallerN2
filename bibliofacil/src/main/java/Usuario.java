@@ -11,22 +11,22 @@ public class Usuario {
     private List<Integer> calificaciones;
     private List<Libro> listaDeDeseados;
 
-    public Usuario() {
+    public Usuario(String user, String pase) {
         this.nombre = "";
-        this.user = "";
-        this.pase = "";
+        this.user = user;
+        this.pase = pase;
         this.historialPrestamos = new ArrayList<>();
         this.librosReservados = new ArrayList<>();
         this.calificaciones = new ArrayList<>();
         this.listaDeDeseados = new ArrayList<>();
     }
 
-    public void editarNombre(String nombre){
-        this.nombre = nombre;
-    }
-
     public String cualNombre(){
         return this.nombre;
+    }
+
+    public void editarNombre(String nombre){
+        this.nombre = nombre;
     }
 
     public void agregarPrestamo(Libro libro) {

@@ -17,7 +17,13 @@ public class Libro {
         this.calificaciones = new ArrayList<>();
         this.comentarios = new ArrayList<>();
     }
-
+    public float mediaCalifaciones(){
+        int suma = 0;
+        for (int calificacion : calificaciones) {
+            suma += calificacion;
+        }
+        return (float) suma / calificaciones.size();
+    }
     public void agregarCalificacion(int calificacion) {
         calificaciones.add(calificacion);
     }
@@ -27,7 +33,7 @@ public class Libro {
     }
 
     public String toCSV() {
-        return String.format("%s,%s,%s,%d,%f", titulo, autor, categoria, ejemplaresDisponibles, calificaciones);
+        return String.format("%s,%s,%s,%d,%f", titulo, autor, categoria, ejemplaresDisponibles, mediaCalifaciones());
     }
     @Override
     public String toString() {
