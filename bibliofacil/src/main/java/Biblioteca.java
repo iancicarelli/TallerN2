@@ -55,6 +55,15 @@ public class Biblioteca {
             System.out.println("Error al iniciar sesión: " + e.getMessage());
         }
     }
+    public static void actualizar(){
+
+    }
+
+    public boolean escanearUsuarioExistente(String user) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.cualSesion().cualUsuario().equals(user)) return true; else return false;
+        }return false;
+    }
 
     /*
     public void prestarLibroA(Usuario usuario, Libro libro) {

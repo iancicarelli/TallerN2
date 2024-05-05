@@ -38,7 +38,7 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String queNombre(){
+    public String cualNombre(){
         return this.nombre;
     }
 

@@ -19,7 +19,7 @@ public class Sesion {
     /*public void desconectar(){
     }*/
 
-    public static boolean verificar() { //lee un archivo y ve si los datos existen.
+    public static boolean verificar() {//lee un archivo y ve si los datos existen.
         return true;
     }
 
@@ -29,6 +29,9 @@ public class Sesion {
 
     public static short quienEs(Usuario usuario) {
         return usuario.quienEs();
+    }
+    public String cualUsuario() {
+        return this.user;
     }
 
     public static String quienEsQuien(Usuario usuario) { //tabla sencilla.
