@@ -27,7 +27,7 @@ public class Libro {
     }
 
     public String toCSV() {
-        return String.format("%s,%s,%s,%d", titulo, autor, categoria, ejemplaresDisponibles);
+        return String.format("%s,%s,%s,%d,%f", titulo, autor, categoria, ejemplaresDisponibles, calificaciones);
     }
     @Override
     public String toString() {

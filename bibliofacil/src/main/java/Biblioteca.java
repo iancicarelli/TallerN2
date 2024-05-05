@@ -35,35 +35,7 @@ public class Biblioteca {
         this.libros.remove(libro);
     }
 
-    public void crearUsuario(String user, String pase) { //Por defecto, privilegios = 0.
-        crearUsuario(user, pase, (short) 0);
-    }
 
-    public void crearUsuario(String user, String pase, short cual) {
-        String nombreArchivo = "bibliofacil/src/main/resources/Usuarios.csv";
-        try (FileWriter writer = new FileWriter(nombreArchivo, true)) {
-            writer.write(String.format("%s,%s,%d,%s,%s,%s,%s", user, pase, cual, "[]", "[]", "[]", "[]")+"\n");
-            System.out.println("Usuario creado éxitosamente.");
-        } catch (IOException e) {
-            System.out.println("Error al acceder el archivo CSV: " + e.getMessage());
-        } try {
-            Usuario usuario = new Usuario(Sesion.conectar(user, pase));
-            if(usuario.cualSesion()!=null) {
-                masUsuario(usuario);
-            }
-        } catch (Exception e){
-            System.out.println("Error al iniciar sesión: " + e.getMessage());
-        }
-    }
-    public static void actualizar(){
-
-    }
-
-    public boolean escanearUsuarioExistente(String user) {
-        for (Usuario usuario : usuarios) {
-            if (usuario.cualSesion().cualUsuario().equals(user)) return true; else return false;
-        }return false;
-    }
 
     /*
     public void prestarLibroA(Usuario usuario, Libro libro) {
