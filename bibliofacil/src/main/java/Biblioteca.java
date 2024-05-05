@@ -112,6 +112,7 @@ public class Biblioteca {
             if (indice >= 0 && indice < libros.size()) {
                 Libro libro = libros.get(indice);
                 eliminarLibro(libro);
+                eliminarLibroDelCSV(indice);
                 System.out.println("Libro eliminado correctamente.");
                 break;
             } else {
@@ -140,4 +141,29 @@ public class Biblioteca {
             System.out.println("Error al leer el archivo CSV: " + e.getMessage());
         }
     } /*!!!HACER UNA CLASE "ACTUALIZAR" PARA QUITAR LA REDUNDANCIA DE LEER Y ESCRIBIR!!!*/
+
+    private void eliminarLibroDelCSV(int indice) {
+        String nombreArchivo = "bibliofacil/src/main/resources/Libros.csv";
+        List<String> lineas = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                lineas.add(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo CSV: " + e.getMessage());
+            return;
+        }
+
+        try (FileWriter writer = new FileWriter(nombreArchivo)) {
+            for (int i = 0; i < lineas.size(); i++) {
+                if (i != indice) {
+                    writer.write(lineas.get(i) + "\n");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al escribir en el archivo CSV: " + e.getMessage());
+        }
+    }
 }
