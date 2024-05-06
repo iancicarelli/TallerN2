@@ -103,8 +103,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ","+historialPrestamos.toString()+",\n"+librosReservados.toString()+
-                ",\n"+calificaciones.toString()+",\n"+listaDeDeseados.toString()+"}";
+        return "Usuario{" + "nombre=" + nombre + "}";
     }
 
     public String toCSV() {

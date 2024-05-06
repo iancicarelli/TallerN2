@@ -68,15 +68,11 @@ public class Lector {
     public static int buscar(String path, String palabra){
         for (int i = 0; i < cantidadDeLineas(path); i++) {
             String linea = leer(path, i);
-            for (int j = 0; j < linea.length(); j++) {
-                if(linea.charAt(j) == ','){
-                    linea = linea.substring(0, i);
+            linea = linea.split(",")[0];
+                if(linea.equals(palabra)){
+                return i;
                 }
             }
-            if(linea.equals(palabra)){
-                return i;
-            }
-        }
         return 0;
     }
 

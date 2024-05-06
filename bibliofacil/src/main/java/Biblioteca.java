@@ -33,6 +33,15 @@ public class Biblioteca {
         }
     }
 
+    public Libro seleccionarLibro(String busqueda){
+        String[] seleccion = Lector.leer("bibliofacil/src/main/resources/Libros.csv",
+                Lector.buscar("bibliofacil/src/main/resources/Libros.csv",busqueda)).split(",");
+        if(Lector.buscar("bibliofacil/src/main/resources/Libros.csv",busqueda)!=0){
+            return new Libro(seleccion[0],seleccion[1],seleccion[2],Integer.parseInt(seleccion[3]),Float.parseFloat(seleccion[4]),Integer.parseInt(seleccion[5]));
+        }
+        return null;
+    }
+
     public void masUsuario(Usuario usuario) {
         String path = "bibliofacil/src/main/resources/Usuarios.csv";
         String pathFolder = "bibliofacil/src/main/resources/Usuarios/";
@@ -60,15 +69,15 @@ public class Biblioteca {
         actualizar();
     }
 
-    public void eliminarUsuario(Usuario usuario) {
+    public void eliminarUsuario(String user) {
         String path = "bibliofacil/src/main/resources/Libros.csv"; //directorio de libros.
-        Lector.borrar(path, Lector.buscar(path, usuario.cualUser()));
+        Lector.borrar(path, Lector.buscar(path, user));
         actualizar();
     }
 
-    public void eliminarLibro(Libro libro) {
+    public void eliminarLibro(String titulo) {
         String path = "bibliofacil/src/main/resources/Libros.csv"; //directorio de libros.
-        Lector.borrar(path, Lector.buscar(path, libro.cualTitulo()));
+        Lector.borrar(path, Lector.buscar(path, titulo));
         actualizar();
     }
 

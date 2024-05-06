@@ -64,7 +64,14 @@ public class Libro {
     }
 
     public String toCSV() {
-        return String.format("%s,%s,%s,%d,%f,%d", titulo, autor, categoria, ejemplaresDisponibles, mediaCalificaciones(), numCalificacion);
+        return String.format("%s,%s,%s,%d,%s,%d", titulo, autor, categoria, ejemplaresDisponibles, fmt(mediaCalificaciones()), numCalificacion);
+    }
+    public static String fmt(double d)
+    {
+        if(d == (long) d)
+            return String.format("%d",(long)d);
+        else
+            return String.format("%s",d);
     }
 
     @Override
