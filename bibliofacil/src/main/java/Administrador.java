@@ -1,11 +1,6 @@
-public class Administrador extends Usuario {//administrador es una palabra muy larga.
+public class Administrador extends Usuario {
 
-    public Administrador(String user, String pase) {
-        super(user, pase);
+    public Administrador(String user, String pase, String nombre) {
+        super(user, pase, nombre);
     }
-
-    /*public void sancionarUsuario(Usuario usuario) {
-    }*/
-
-    /*Mejorar abstracción con relación a las clases Administrador y Biblioteca*/
 }

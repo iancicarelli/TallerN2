@@ -1,66 +1,93 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class Biblioteca {
     public String nombre;
     public List<Usuario> usuarios;
     public List<Libro> libros;
 
-    private  Scanner teclado = new Scanner(System.in);
-
     public Biblioteca(String nombre) {
         this.nombre = nombre;
         this.usuarios = new ArrayList<>();
         this.libros = new ArrayList<>();
+        actualizar();
+    }
+
+    public void actualizar(){
+        String path = "bibliofacil/src/main/resources/";
+        usuarios.clear();
+        libros.clear();
+        for (int i = 0; i < Lector.cantidadDeLineas(path+"Usuarios.csv"); i++) {
+            if(i!=0){
+                String[] columnas =  Lector.leer(path+"Usuarios.csv",i).split(",");
+                usuarios.add(new Usuario(columnas[0],columnas[1],columnas[2]));
+            }
+        }
+        for (int i = 0; i < Lector.cantidadDeLineas(path+"Libros.csv"); i++) {
+            if(i!=0){
+                String[] columnas =  Lector.leer(path+"Libros.csv",i).split(",");
+                libros.add(new Libro(columnas[0],columnas[1],columnas[2],
+                        Integer.parseInt(columnas[3]),Float.parseFloat(columnas[4]),
+                        Integer.parseInt(columnas[5])));
+            }
+        }
     }
 
     public void masUsuario(Usuario usuario) {
-        this.usuarios.add(usuario);
+        String path = "bibliofacil/src/main/resources/Usuarios.csv";
+        String pathFolder = "bibliofacil/src/main/resources/Usuarios/";
+        Lector.escribir(path, usuario.toCSV());
+        Lector.crear(pathFolder+usuario.cualUser()+"prestamos.csv");
+        Lector.crear(pathFolder+usuario.cualUser()+"reservas.csv");
+        Lector.crear(pathFolder+usuario.cualUser()+"calificaciones.csv");
+        Lector.crear(pathFolder+usuario.cualUser()+"deseados.csv");
+        Lector.escribir(pathFolder+usuario.cualUser()+"prestamos.csv",
+                "Titulo,Autor,Categoria,Ejemplares Disponibles,Calificacion,Numero De Calificaciones");
+        Lector.escribir(pathFolder+usuario.cualUser()+"reservas.csv",
+                "Titulo,Autor,Categoria,Ejemplares Disponibles,Calificacion,Numero De Calificaciones");
+        Lector.escribir(pathFolder+usuario.cualUser()+"calificaciones.csv",
+                "Calificacion");
+        Lector.escribir(pathFolder+usuario.cualUser()+"deseados.csv",
+                "Titulo,Autor,Categoria,Ejemplares Disponibles,Calificacion,Numero De Calificaciones");
+        actualizar();
     }
 
     public void masLibro(Libro libro) {
-        this.libros.add(libro);
+        String path = "bibliofacil/src/main/resources/Libros.csv";
+        Lector.escribir(path, libro.toCSV());
+        Lector.crear("bibliofacil/src/main/resources/Libros/"+libro.cualTitulo()+"comentarios.csv");
+        Lector.escribir("bibliofacil/src/main/resources/Libros/"+libro.cualTitulo()+"comentarios.csv","Comentario");
+        actualizar();
     }
 
     public void eliminarUsuario(Usuario usuario) {
-        this.usuarios.remove(usuario);
+        String path = "bibliofacil/src/main/resources/Libros.csv"; //directorio de libros.
+        Lector.borrar(path, Lector.buscar(path, usuario.cualUser()));
+        actualizar();
     }
 
     public void eliminarLibro(Libro libro) {
-        this.libros.remove(libro);
+        String path = "bibliofacil/src/main/resources/Libros.csv"; //directorio de libros.
+        Lector.borrar(path, Lector.buscar(path, libro.cualTitulo()));
+        actualizar();
     }
-
-
-
-    /*
-    public void prestarLibroA(Usuario usuario, Libro libro) {
-    }*/
 
     public String verLibro(Libro libro) {
         return libro.toString();
     }
+
     public void mostrarLibros(){
         for (Libro libro : libros) {
-            System.out.println(verLibro(libro));
+            System.out.println(libro.toString());
         }
     }
-    public void crearLibro() {
-        System.out.println("Ingrese el título del libro");
-        String titulo = teclado.nextLine();
-        System.out.println("Ingrese el autor del libro");
-        String autor = teclado.nextLine();
-        System.out.println("Ingrese la categoria del libro");
-        String categoria = teclado.nextLine();
-        int cantidad = validarEntero("Ingrese los ejemplares disponibles");
-        masLibro(new Libro(titulo,autor,categoria,cantidad));
-        agregarLibroACSV(new Libro(titulo,autor,categoria,cantidad));
-    }
 
+    public void mostrarUsuarios(){
+        for (Usuario usuario : usuarios) {
+            System.out.println(usuario.toString());
+        }
+    }
+/*
     private int validarEntero(String mensaje) {
         int numero;
         do {
@@ -76,65 +103,5 @@ public class Biblioteca {
         return numero;
     }
 
-    public void eliminarLibroPorIndice() {
-        mostrarLibros();
-        int indice;
-        do {
-            indice = validarEntero("Ingrese el índice del libro que desea eliminar:");
-            if (indice >= 0 && indice < libros.size()) {
-                Libro libro = libros.get(indice);
-                eliminarLibro(libro);
-                eliminarLibroDelCSV(indice);
-                System.out.println("Libro eliminado correctamente.");
-                break;
-            } else {
-                System.out.println("Índice inválido. Por favor, ingrese un índice válido.");
-            }
-        } while (true);
-    }
-    public void agregarLibroACSV(Libro libro) {
-        String nombreArchivo = "bibliofacil/src/main/resources/Libros.csv";
-        try (FileWriter writer = new FileWriter(nombreArchivo, true)) {
-            writer.write(libro.toCSV() + "\n");
-            System.out.println("Libro agregado al archivo CSV correctamente.");
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo CSV: " + e.getMessage());
-        }
-    }
-
-    public void mostrarLibrosDesdeCSV() {
-        String nombreArchivo = "bibliofacil/src/main/resources/Libros.csv";
-        String linea;
-        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
-            while ((linea = reader.readLine()) != null) {
-                System.out.println(linea);
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo CSV: " + e.getMessage());
-        }
-    }
-    private void eliminarLibroDelCSV(int indice) {
-        String nombreArchivo = "bibliofacil/src/main/resources/Libros.csv";
-        List<String> lineas = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(nombreArchivo))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                lineas.add(linea);
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer el archivo CSV: " + e.getMessage());
-            return;
-        }
-
-        try (FileWriter writer = new FileWriter(nombreArchivo)) {
-            for (int i = 0; i < lineas.size(); i++) {
-                if (i != indice) {
-                    writer.write(lineas.get(i) + "\n");
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo CSV: " + e.getMessage());
-        }
-    }
+ */
 }

@@ -1,11 +1,11 @@
-Titulo,Autor,Categoria,Ejemplares Disponibles,Calificaciones,Comentarios
-El nombre del viento,Patrick Rothfuss,Fantasía,10,[],[]
-Cien años de soledad,Gabriel García Márquez,Realismo mágico,15,[],[]
-1984,George Orwell,Ficción distópica,20,[],[]
-Orgullo y prejuicio,Jane Austen,Romance clásico,12,[],[]
-Crimen y castigo,Fiodor Dostoievski,Ficción psicológica,8,[],[]
-Don Quijote de la Mancha,Miguel de Cervantes Saavedra,Novela clásica,25,[],[]
-Harry Potter y la piedra filosofal,J.K. Rowling,Fantasía juvenil,30,[],[]
-Moby Dick,Herman Melville,Aventura clásica,18,[],[]
-El señor de los anillos,J.R.R. Tolkien,Fantasía épica,22,[],[]
-To Kill a Mockingbird,Harper Lee,Ficción histórica,10,[],[]
+Titulo,Autor,Categoria,Ejemplares Disponibles,Calificacion,Numero De Calificaciones
+El nombre del viento,Patrick Rothfuss,Fantasía,10,3.9,41
+Cien años de soledad,Gabriel García Márquez,Realismo mágico,15,4.1,13
+1984,George Orwell,Ficción distópica,20,4.5,182
+Orgullo y prejuicio,Jane Austen,Romance clásico,12,4.1,23
+Crimen y castigo,Fiodor Dostoievski,Ficción psicológica,8,3.2,12
+Don Quijote de la Mancha,Miguel de Cervantes Saavedra,Novela clásica,25,4.7,119
+Harry Potter y la piedra filosofal,J.K. Rowling,Fantasía juvenil,30,4.3,172
+Moby Dick,Herman Melville,Aventura clásica,18,4.4,44
+El señor de los anillos,J.R.R. Tolkien,Fantasía épica,22,4.2,47
+To Kill a Mockingbird,Harper Lee,Ficción histórica,10,3.9,87
